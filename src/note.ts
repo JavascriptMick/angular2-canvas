@@ -6,14 +6,14 @@ import {Component, bootstrap, View} from "angular2/angular2";
     selector: 'my-app'
 })
 @View({
-    template: '<h1>Hello {{ name }}</h1>'
+    template: '<textarea>{{ noteText }}</textarea>'
 })
-class MyAppComponent {
-    name: string;
+class NoteComponent {
+    noteText: string;
 
     constructor() {
-        this.name = 'Alice';
+        this.noteText = 'This is an editable sticky note';
     }
 }
 
-bootstrap(MyAppComponent);
+bootstrap(NoteComponent);

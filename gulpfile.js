@@ -18,6 +18,11 @@ gulp.task('html', function () {
         .pipe(gulp.dest('dist'));
 });
 
+gulp.task('css', function () {
+    return gulp.src('src/**/*.css')
+        .pipe(gulp.dest('dist'));
+});
+
 gulp.task('clean', function(done) {
   del(['dist'], done);
 });
@@ -32,4 +37,4 @@ gulp.task('libs', function () {
       .pipe(gulp.dest('dist/lib'));
 });
 
-gulp.task('default', ['js', 'libs', 'html']);
+gulp.task('default', ['js', 'libs', 'html', 'css']);

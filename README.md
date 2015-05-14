@@ -1,4 +1,6 @@
-# Simple Angular 2 app written in TypeScript with Gulp Automation
+# Canvas written in Angular 2
+
+based on https://github.com/mdausmann/angular2-gulp-typescript
 
 ## Install Gulp
 
@@ -6,9 +8,9 @@
 
 ## Compile your source and libs and move to dist
 
-    $ cd angular2-gulp-typescript
+    $ cd angular2-canvas
     $ gulp
-    Using gulpfile ....angular2-gulp-typescript/gulpfile.js
+    Using gulpfile ....angular2-canvas/gulpfile.js
     Starting 'js'...
     Starting 'libs'...
     Starting 'html'...
@@ -30,10 +32,11 @@ We have good experience using these Typescript aware editors:
 From the directory that contains index.html:
 
     $ npm install -g http-server  # Or sudo npm install -g http-server
+    $ cd dist
     $ http-server                 # Creates a server at localhost:8080
     # In a browser, visit localhost:8080/index.html
 
 ## Clean dist
 
-    $ cd angular2-gulp-typescript
+    $ cd angular2-canvas
     $ gulp clean
