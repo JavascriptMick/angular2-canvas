@@ -3,7 +3,7 @@
 import {Component, bootstrap, View} from "angular2/angular2";
 
 @Component({
-    selector: 'my-app'
+    selector: 'my-note'
 })
 @View({
     template: '<textarea>{{ noteText }}</textarea>'
@@ -16,4 +16,4 @@ class NoteComponent {
     }
 }
 
-bootstrap(NoteComponent);
+export default NoteComponent;
