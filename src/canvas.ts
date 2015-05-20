@@ -10,7 +10,6 @@ import NoteComponent from "note";
     template: `
     <h1>{{ canvasTitle }}</h1>
     <my-note *for="#note of notes" [noteText]="note"></my-note>
-
     `,
     directives: [NoteComponent, For]
 })
