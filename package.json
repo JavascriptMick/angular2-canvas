@@ -18,12 +18,13 @@
   "homepage": "https://github.com/mdausmann/angular2-gulp-typescript",
   "devDependencies": {
     "del": "^1.1.1",
+    "es6-module-loader": "^0.16.6",
     "gulp": "^3.8.11",
+    "gulp-download": "0.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-typescript": "^2.6.0",
-    "typescript": "^1.5.0-beta",
-    "es6-module-loader": "^0.16.6",
     "systemjs": "^0.16.11",
-    "traceur": "0.0.87"
+    "traceur": "0.0.87",
+    "typescript": "^1.5.0-beta"
   }
 }

@@ -12,7 +12,7 @@ class NoteComponent {
     noteText: string;
 
     constructor() {
-        this.noteText = 'This is an editable sticky note';
+      this.noteText = 'Write Stuff Here.';
     }
 }
 

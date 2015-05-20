@@ -7380,7 +7380,6 @@ System.register("angular2/src/facade/collection", ["angular2/src/facade/lang"], 
       Map,
       Set,
       StringMap,
-      createMapFromPairs,
       MapWrapper,
       StringMapWrapper,
       ListWrapper,
@@ -7421,23 +7420,6 @@ System.register("angular2/src/facade/collection", ["angular2/src/facade/lang"], 
       $__export("Set", Set);
       StringMap = global.Object;
       $__export("StringMap", StringMap);
-      createMapFromPairs = (function() {
-        try {
-          if (new Map([1, 2]).size === 2) {
-            return function createMapFromPairs(pairs) {
-              return new Map(pairs);
-            };
-          }
-        } catch (e) {}
-        return function createMapAndPopulateFromPairs(pairs) {
-          var map = new Map();
-          for (var i = 0; i < pairs.length; i++) {
-            var pair = pairs[i];
-            map.set(pair[0], pair[1]);
-          }
-          return map;
-        };
-      })();
       MapWrapper = (function() {
         function MapWrapper() {}
         return ($traceurRuntime.createClass)(MapWrapper, {}, {
@@ -7455,7 +7437,7 @@ System.register("angular2/src/facade/collection", ["angular2/src/facade/lang"], 
             return result;
           },
           createFromPairs: function(pairs) {
-            return createMapFromPairs(pairs);
+            return new Map(pairs);
           },
           get: function(m, k) {
             return m.get(k);
@@ -15572,9 +15554,9 @@ System.register("angular2/src/core/annotations/decorators", ["angular2/src/core/
   };
 });
 
-System.register("angular2/src/directives/ng_for", ["angular2/src/core/annotations_impl/annotations", "angular2/src/core/compiler/view_container_ref", "angular2/src/core/compiler/view_ref", "angular2/src/facade/lang", "angular2/src/facade/collection"], function($__export) {
+System.register("angular2/src/directives/for", ["angular2/src/core/annotations_impl/annotations", "angular2/src/core/compiler/view_container_ref", "angular2/src/core/compiler/view_ref", "angular2/src/facade/lang", "angular2/src/facade/collection"], function($__export) {
   "use strict";
-  var __moduleName = "angular2/src/directives/ng_for";
+  var __moduleName = "angular2/src/directives/for";
   var Directive,
       ViewContainerRef,
       ViewRef,
@@ -15582,7 +15564,7 @@ System.register("angular2/src/directives/ng_for", ["angular2/src/core/annotation
       isPresent,
       isBlank,
       ListWrapper,
-      NgFor,
+      For,
       RecordViewTuple;
   return {
     setters: [function($__m) {
@@ -15599,12 +15581,12 @@ System.register("angular2/src/directives/ng_for", ["angular2/src/core/annotation
       ListWrapper = $__m.ListWrapper;
     }],
     execute: function() {
-      NgFor = (function() {
-        function NgFor(viewContainer, protoViewRef) {
+      For = (function() {
+        function For(viewContainer, protoViewRef) {
           this.viewContainer = viewContainer;
           this.protoViewRef = protoViewRef;
         }
-        return ($traceurRuntime.createClass)(NgFor, {
+        return ($traceurRuntime.createClass)(For, {
           set iterableChanges(changes) {
             if (isBlank(changes)) {
               this.viewContainer.clear();
@@ -15617,11 +15599,11 @@ System.register("angular2/src/directives/ng_for", ["angular2/src/core/annotation
             changes.forEachMovedItem((function(movedRecord) {
               return ListWrapper.push(recordViewTuples, new RecordViewTuple(movedRecord, null));
             }));
-            var insertTuples = NgFor.bulkRemove(recordViewTuples, this.viewContainer);
+            var insertTuples = For.bulkRemove(recordViewTuples, this.viewContainer);
             changes.forEachAddedItem((function(addedRecord) {
               return ListWrapper.push(insertTuples, new RecordViewTuple(addedRecord, null));
             }));
-            NgFor.bulkInsert(insertTuples, this.viewContainer, this.protoViewRef);
+            For.bulkInsert(insertTuples, this.viewContainer, this.protoViewRef);
             for (var i = 0; i < insertTuples.length; i++) {
               this.perViewChange(insertTuples[i].view, insertTuples[i].record);
             }
@@ -15663,14 +15645,14 @@ System.register("angular2/src/directives/ng_for", ["angular2/src/core/annotation
           }
         });
       }());
-      $__export("NgFor", NgFor);
-      Object.defineProperty(NgFor, "annotations", {get: function() {
+      $__export("For", For);
+      Object.defineProperty(For, "annotations", {get: function() {
           return [new Directive({
-            selector: '[ng-for][ng-for-of]',
-            properties: {'iterableChanges': 'ngForOf | iterableDiff'}
+            selector: '[for][of]',
+            properties: {'iterableChanges': 'of | iterableDiff'}
           })];
         }});
-      Object.defineProperty(NgFor, "parameters", {get: function() {
+      Object.defineProperty(For, "parameters", {get: function() {
           return [[ViewContainerRef], [ProtoViewRef]];
         }});
       RecordViewTuple = (function() {
@@ -15684,14 +15666,14 @@ System.register("angular2/src/directives/ng_for", ["angular2/src/core/annotation
   };
 });
 
-System.register("angular2/src/directives/ng_if", ["angular2/src/core/annotations_impl/annotations", "angular2/src/core/compiler/view_container_ref", "angular2/src/core/compiler/view_ref", "angular2/src/facade/lang"], function($__export) {
+System.register("angular2/src/directives/if", ["angular2/src/core/annotations_impl/annotations", "angular2/src/core/compiler/view_container_ref", "angular2/src/core/compiler/view_ref", "angular2/src/facade/lang"], function($__export) {
   "use strict";
-  var __moduleName = "angular2/src/directives/ng_if";
+  var __moduleName = "angular2/src/directives/if";
   var Directive,
       ViewContainerRef,
       ProtoViewRef,
       isBlank,
-      NgIf;
+      If;
   return {
     setters: [function($__m) {
       Directive = $__m.Directive;
@@ -15703,13 +15685,13 @@ System.register("angular2/src/directives/ng_if", ["angular2/src/core/annotations
       isBlank = $__m.isBlank;
     }],
     execute: function() {
-      NgIf = (function() {
-        function NgIf(viewContainer, protoViewRef) {
+      If = (function() {
+        function If(viewContainer, protoViewRef) {
           this.viewContainer = viewContainer;
           this.prevCondition = null;
           this.protoViewRef = protoViewRef;
         }
-        return ($traceurRuntime.createClass)(NgIf, {set ngIf(newCondition) {
+        return ($traceurRuntime.createClass)(If, {set condition(newCondition) {
             if (newCondition && (isBlank(this.prevCondition) || !this.prevCondition)) {
               this.prevCondition = true;
               this.viewContainer.create(this.protoViewRef);
@@ -15719,38 +15701,38 @@ System.register("angular2/src/directives/ng_if", ["angular2/src/core/annotations
             }
           }}, {});
       }());
-      $__export("NgIf", NgIf);
-      Object.defineProperty(NgIf, "annotations", {get: function() {
+      $__export("If", If);
+      Object.defineProperty(If, "annotations", {get: function() {
           return [new Directive({
-            selector: '[ng-if]',
-            properties: {'ngIf': 'ngIf'}
+            selector: '[if]',
+            properties: {'condition': 'if'}
           })];
         }});
-      Object.defineProperty(NgIf, "parameters", {get: function() {
+      Object.defineProperty(If, "parameters", {get: function() {
           return [[ViewContainerRef], [ProtoViewRef]];
         }});
     }
   };
 });
 
-System.register("angular2/src/directives/ng_non_bindable", ["angular2/src/core/annotations_impl/annotations"], function($__export) {
+System.register("angular2/src/directives/non_bindable", ["angular2/src/core/annotations_impl/annotations"], function($__export) {
   "use strict";
-  var __moduleName = "angular2/src/directives/ng_non_bindable";
+  var __moduleName = "angular2/src/directives/non_bindable";
   var Directive,
-      NgNonBindable;
+      NonBindable;
   return {
     setters: [function($__m) {
       Directive = $__m.Directive;
     }],
     execute: function() {
-      NgNonBindable = (function() {
-        function NgNonBindable() {}
-        return ($traceurRuntime.createClass)(NgNonBindable, {}, {});
+      NonBindable = (function() {
+        function NonBindable() {}
+        return ($traceurRuntime.createClass)(NonBindable, {}, {});
       }());
-      $__export("NgNonBindable", NgNonBindable);
-      Object.defineProperty(NgNonBindable, "annotations", {get: function() {
+      $__export("NonBindable", NonBindable);
+      Object.defineProperty(NonBindable, "annotations", {get: function() {
           return [new Directive({
-            selector: '[ng-non-bindable]',
+            selector: '[non-bindable]',
             compileChildren: false
           })];
         }});
@@ -15758,9 +15740,9 @@ System.register("angular2/src/directives/ng_non_bindable", ["angular2/src/core/a
   };
 });
 
-System.register("angular2/src/directives/ng_switch", ["angular2/src/core/annotations_impl/annotations", "angular2/src/core/compiler/view_container_ref", "angular2/src/core/compiler/view_ref", "angular2/src/facade/lang", "angular2/src/facade/collection", "angular2/src/core/annotations_impl/visibility"], function($__export) {
+System.register("angular2/src/directives/switch", ["angular2/src/core/annotations_impl/annotations", "angular2/src/core/compiler/view_container_ref", "angular2/src/core/compiler/view_ref", "angular2/src/facade/lang", "angular2/src/facade/collection", "angular2/src/core/annotations_impl/visibility"], function($__export) {
   "use strict";
-  var __moduleName = "angular2/src/directives/ng_switch";
+  var __moduleName = "angular2/src/directives/switch";
   var Directive,
       ViewContainerRef,
       ProtoViewRef,
@@ -15773,9 +15755,9 @@ System.register("angular2/src/directives/ng_switch", ["angular2/src/core/annotat
       Map,
       Parent,
       SwitchView,
-      NgSwitch,
-      NgSwitchWhen,
-      NgSwitchDefault,
+      Switch,
+      SwitchWhen,
+      SwitchDefault,
       _whenDefault;
   return {
     setters: [function($__m) {
@@ -15814,14 +15796,14 @@ System.register("angular2/src/directives/ng_switch", ["angular2/src/core/annotat
       Object.defineProperty(SwitchView, "parameters", {get: function() {
           return [[ViewContainerRef], [ProtoViewRef]];
         }});
-      NgSwitch = (function() {
-        function NgSwitch() {
+      Switch = (function() {
+        function Switch() {
           this._valueViews = MapWrapper.create();
           this._activeViews = ListWrapper.create();
           this._useDefault = false;
         }
-        return ($traceurRuntime.createClass)(NgSwitch, {
-          set ngSwitch(value) {
+        return ($traceurRuntime.createClass)(Switch, {
+          set value(value) {
             this._emptyAllActiveViews();
             this._useDefault = false;
             var views = MapWrapper.get(this._valueViews, value);
@@ -15886,63 +15868,63 @@ System.register("angular2/src/directives/ng_switch", ["angular2/src/core/annotat
           }
         }, {});
       }());
-      $__export("NgSwitch", NgSwitch);
-      Object.defineProperty(NgSwitch, "annotations", {get: function() {
+      $__export("Switch", Switch);
+      Object.defineProperty(Switch, "annotations", {get: function() {
           return [new Directive({
-            selector: '[ng-switch]',
-            properties: {'ngSwitch': 'ngSwitch'}
+            selector: '[switch]',
+            properties: {'value': 'switch'}
           })];
         }});
-      Object.defineProperty(NgSwitch.prototype._onWhenValueChanged, "parameters", {get: function() {
+      Object.defineProperty(Switch.prototype._onWhenValueChanged, "parameters", {get: function() {
           return [[], [], [SwitchView]];
         }});
-      Object.defineProperty(NgSwitch.prototype._activateViews, "parameters", {get: function() {
+      Object.defineProperty(Switch.prototype._activateViews, "parameters", {get: function() {
           return [[assert.genericType(List, SwitchView)]];
         }});
-      Object.defineProperty(NgSwitch.prototype._registerView, "parameters", {get: function() {
+      Object.defineProperty(Switch.prototype._registerView, "parameters", {get: function() {
           return [[], [SwitchView]];
         }});
-      Object.defineProperty(NgSwitch.prototype._deregisterView, "parameters", {get: function() {
+      Object.defineProperty(Switch.prototype._deregisterView, "parameters", {get: function() {
           return [[], [SwitchView]];
         }});
-      NgSwitchWhen = (function() {
-        function NgSwitchWhen(viewContainer, protoViewRef, sswitch) {
+      SwitchWhen = (function() {
+        function SwitchWhen(viewContainer, protoViewRef, sswitch) {
           this._value = _whenDefault;
           this._switch = sswitch;
           this._view = new SwitchView(viewContainer, protoViewRef);
         }
-        return ($traceurRuntime.createClass)(NgSwitchWhen, {
+        return ($traceurRuntime.createClass)(SwitchWhen, {
           onDestroy: function() {
             this._switch;
           },
-          set ngSwitchWhen(value) {
+          set when(value) {
             this._switch._onWhenValueChanged(this._value, value, this._view);
             this._value = value;
           }
         }, {});
       }());
-      $__export("NgSwitchWhen", NgSwitchWhen);
-      Object.defineProperty(NgSwitchWhen, "annotations", {get: function() {
+      $__export("SwitchWhen", SwitchWhen);
+      Object.defineProperty(SwitchWhen, "annotations", {get: function() {
           return [new Directive({
-            selector: '[ng-switch-when]',
-            properties: {'ngSwitchWhen': 'ngSwitchWhen'}
+            selector: '[switch-when]',
+            properties: {'when': 'switch-when'}
           })];
         }});
-      Object.defineProperty(NgSwitchWhen, "parameters", {get: function() {
-          return [[ViewContainerRef], [ProtoViewRef], [NgSwitch, new Parent()]];
+      Object.defineProperty(SwitchWhen, "parameters", {get: function() {
+          return [[ViewContainerRef], [ProtoViewRef], [Switch, new Parent()]];
         }});
-      NgSwitchDefault = (function() {
-        function NgSwitchDefault(viewContainer, protoViewRef, sswitch) {
+      SwitchDefault = (function() {
+        function SwitchDefault(viewContainer, protoViewRef, sswitch) {
           sswitch._registerView(_whenDefault, new SwitchView(viewContainer, protoViewRef));
         }
-        return ($traceurRuntime.createClass)(NgSwitchDefault, {}, {});
+        return ($traceurRuntime.createClass)(SwitchDefault, {}, {});
       }());
-      $__export("NgSwitchDefault", NgSwitchDefault);
-      Object.defineProperty(NgSwitchDefault, "annotations", {get: function() {
-          return [new Directive({selector: '[ng-switch-default]'})];
+      $__export("SwitchDefault", SwitchDefault);
+      Object.defineProperty(SwitchDefault, "annotations", {get: function() {
+          return [new Directive({selector: '[switch-default]'})];
         }});
-      Object.defineProperty(NgSwitchDefault, "parameters", {get: function() {
-          return [[ViewContainerRef], [ProtoViewRef], [NgSwitch, new Parent()]];
+      Object.defineProperty(SwitchDefault, "parameters", {get: function() {
+          return [[ViewContainerRef], [ProtoViewRef], [Switch, new Parent()]];
         }});
       _whenDefault = new Object();
     }
@@ -19447,16 +19429,16 @@ System.register("angular2/annotations", ["angular2/src/core/annotations/annotati
   };
 });
 
-System.register("angular2/directives", ["angular2/src/facade/lang", "angular2/src/directives/ng_for", "angular2/src/directives/ng_if", "angular2/src/directives/ng_non_bindable", "angular2/src/directives/ng_switch", "angular2/src/directives/class"], function($__export) {
+System.register("angular2/directives", ["angular2/src/facade/lang", "angular2/src/directives/for", "angular2/src/directives/if", "angular2/src/directives/non_bindable", "angular2/src/directives/switch", "angular2/src/directives/class"], function($__export) {
   "use strict";
   var __moduleName = "angular2/directives";
   var CONST_EXPR,
-      NgFor,
-      NgIf,
-      NgNonBindable,
-      NgSwitch,
-      NgSwitchWhen,
-      NgSwitchDefault,
+      For,
+      If,
+      NonBindable,
+      Switch,
+      SwitchWhen,
+      SwitchDefault,
       coreDirectives;
   var $__exportNames = {coreDirectives: true};
   var $__exportNames = {coreDirectives: true};
@@ -19467,27 +19449,27 @@ System.register("angular2/directives", ["angular2/src/facade/lang", "angular2/sr
     setters: [function($__m) {
       CONST_EXPR = $__m.CONST_EXPR;
     }, function($__m) {
-      NgFor = $__m.NgFor;
+      For = $__m.For;
       Object.keys($__m).forEach(function(p) {
         if (!$__exportNames[p])
           $__export(p, $__m[p]);
       });
     }, function($__m) {
-      NgIf = $__m.NgIf;
+      If = $__m.If;
       Object.keys($__m).forEach(function(p) {
         if (!$__exportNames[p])
           $__export(p, $__m[p]);
       });
     }, function($__m) {
-      NgNonBindable = $__m.NgNonBindable;
+      NonBindable = $__m.NonBindable;
       Object.keys($__m).forEach(function(p) {
         if (!$__exportNames[p])
           $__export(p, $__m[p]);
       });
     }, function($__m) {
-      NgSwitch = $__m.NgSwitch;
-      NgSwitchWhen = $__m.NgSwitchWhen;
-      NgSwitchDefault = $__m.NgSwitchDefault;
+      Switch = $__m.Switch;
+      SwitchWhen = $__m.SwitchWhen;
+      SwitchDefault = $__m.SwitchDefault;
       Object.keys($__m).forEach(function(p) {
         if (!$__exportNames[p])
           $__export(p, $__m[p]);
@@ -19499,7 +19481,7 @@ System.register("angular2/directives", ["angular2/src/facade/lang", "angular2/sr
       });
     }],
     execute: function() {
-      coreDirectives = CONST_EXPR([NgFor, NgIf, NgNonBindable, NgSwitch, NgSwitchWhen, NgSwitchDefault]);
+      coreDirectives = CONST_EXPR([For, If, NonBindable, Switch, SwitchWhen, SwitchDefault]);
       $__export("coreDirectives", coreDirectives);
     }
   };
@@ -22010,17 +21992,9 @@ System.register("angular2/src/change_detection/parser/parser", ["angular2/src/di
           },
           parseTemplateBindings: function() {
             var bindings = [];
-            var prefix = null;
             while (this.index < this.tokens.length) {
               var keyIsVar = this.optionalKeywordVar();
               var key = this.expectTemplateBindingKey();
-              if (!keyIsVar) {
-                if (prefix == null) {
-                  prefix = key;
-                } else {
-                  key = prefix + '-' + key;
-                }
-              }
               this.optionalCharacter($COLON);
               var name = null;
               var expression = null;

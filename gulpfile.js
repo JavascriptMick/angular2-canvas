@@ -1,8 +1,14 @@
 var del = require('del');
 var gulp = require('gulp');
 var rename = require('gulp-rename');
+var download = require('gulp-download');
 var ts = require('gulp-typescript');
 var tsProject = ts.createProject('tsconfig.json', {typescript: require('typescript')});
+
+gulp.task('angular2', function(){
+  download('https://code.angularjs.org/2.0.0-alpha.23/angular2.dev.js')
+    .pipe(gulp.dest("bundle/"));
+});
 
 gulp.task('js', function() {
     var tsResult = tsProject.src()     
