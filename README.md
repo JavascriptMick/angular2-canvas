@@ -2,41 +2,29 @@
 
 based on https://github.com/mdausmann/angular2-gulp-typescript
 
-## Install Gulp
+## Install Globals (if you haven't already)
 
-    $ npm install -g gulp  # Or sudo npm install -g gulp
+    $ npm install -g gulp
+    $ npm install -g http-server
 
-## Compile your source and libs and move to dist
+## Install Locals
 
     $ cd angular2-canvas
+    $ npm install
+
+## Compile source and libs and move to dist
+
     $ gulp
-    Using gulpfile ....angular2-canvas/gulpfile.js
-    Starting 'js'...
-    Starting 'libs'...
-    Starting 'html'...
-    Finished 'html' after 1.11 s
-    Finished 'js' after 1.13 s
-    Finished 'libs' after 1.12 s
-    Starting 'default'...
-    Finished 'default' after 14 μs
 
-## Edit your app (src folder)
-We have good experience using these Typescript aware editors:
-
-* [Visual Studio Code](https://code.visualstudio.com/)
-* [Webstorm 10](https://www.jetbrains.com/webstorm/download/)
-* [Atom](https://atom.io/) with [TypeScript plugin](https://atom.io/packages/atom-typescript)
-* [Sublime Text](http://www.sublimetext.com/3) with [Typescript-Sublime-Plugin](https://github.com/Microsoft/Typescript-Sublime-plugin#installation)
-
-## Load the app
-From the directory that contains index.html:
-
-    $ npm install -g http-server  # Or sudo npm install -g http-server
+## Make it go
     $ cd dist
-    $ http-server                 # Creates a server at localhost:8080
-    # In a browser, visit localhost:8080/index.html
+    $ http-server
+    # In a browser, visit http://localhost:8080/
 
-## Clean dist
+## Other (optional) tasks
 
-    $ cd angular2-canvas
+### Clean up the dist folder
     $ gulp clean
+
+### Download Angular2 dev preview from https://code.angularjs.org
+    $ gulp angular2
