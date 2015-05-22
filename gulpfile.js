@@ -6,7 +6,7 @@ var ts = require('gulp-typescript');
 var tsProject = ts.createProject('tsconfig.json', {typescript: require('typescript')});
 
 gulp.task('angular2', function(){
-  download('https://code.angularjs.org/2.0.0-alpha.23/angular2.dev.js')
+  download('https://code.angularjs.org/2.0.0-alpha.24/angular2.dev.js')
     .pipe(gulp.dest("bundle/"));
 });
 

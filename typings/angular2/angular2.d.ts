@@ -533,7 +533,7 @@ declare module "angular2/angular2" {
    * - `<template [for]="#item" [of]="items" #i="index"><li>...</li></template>`
    *
    */
-  function For(): void;
+  function NgFor(): void;
   
   /**
    * Removes or recreates a portion of the DOM tree based on an {expression}.
@@ -557,7 +557,7 @@ declare module "angular2/angular2" {
    * - `<template [if]="condition"><div>...</div></template>`
    *
    */
-  function If(): void;
+  function NgIf(): void;
   
   /**
    * The `NonBindable` directive tells Angular not to compile or bind the contents of the current

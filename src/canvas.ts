@@ -1,6 +1,6 @@
 /// <reference path="../typings/angular2/angular2.d.ts" />
 
-import {Component, bootstrap, View, For} from "angular2/angular2";
+import {Component, bootstrap, View, NgFor} from "angular2/angular2";
 import NoteComponent from "note";
 
 @Component({
@@ -9,9 +9,9 @@ import NoteComponent from "note";
 @View({
     template: `
     <h1>{{ canvasTitle }}</h1>
-    <my-note *for="#note of notes" [noteText]="note"></my-note>
+    <my-note *ng-for="#note of notes" [note-text]="note"></my-note>
     `,
-    directives: [NoteComponent, For]
+    directives: [NoteComponent, NgFor]
 })
 class CanvasComponent {
     canvasTitle: string;
@@ -24,4 +24,3 @@ class CanvasComponent {
 }
 
 bootstrap(CanvasComponent);
-

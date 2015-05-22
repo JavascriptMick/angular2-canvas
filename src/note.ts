@@ -10,10 +10,9 @@ import {Component, bootstrap, View} from "angular2/angular2";
     template: '<textarea>{{ noteText }}</textarea>'
 })
 class NoteComponent {
-    noteText: string;
+    noteText: string = 'Write Stuff Here';
 
     constructor() {
-      this.noteText = 'Write Stuff Here.';
     }
 }
 
