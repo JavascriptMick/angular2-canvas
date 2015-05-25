@@ -619,4 +619,20 @@ declare module "angular2/di" {
    *
    */
    function bind(token: any): any;
+
+   /**
+    * A marker annotation that marks a class as available to `Injector` for creation. Used by tooling
+    * for generating constructor stubs.
+    *
+    * ```
+    * class NeedsService {
+    *   constructor(svc:UsefulService) {}
+    * }
+    *
+    * @Injectable
+    * class UsefulService {}
+    * ```
+    * @exportedAs angular2/di_annotations
+    */
+   function Injectable(): (target: any) => any;
 }
